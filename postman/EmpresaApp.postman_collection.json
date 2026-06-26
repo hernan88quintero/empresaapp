@@ -1,0 +1,388 @@
+{
+  "info": {
+    "name": "EmpresaApp API",
+    "description": "Colección completa para probar la API de EmpresaApp.\n\n1. Ejecuta primero **Login** (carpeta Auth)\n2. El token se guarda automáticamente en la variable `token`\n3. Importa también el environment `EmpresaApp-Local.postman_environment.json`\n4. Asegúrate de que la app esté corriendo en http://localhost:8080",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth (público - sin token)",
+      "item": [
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const json = pm.response.json();",
+                  "    pm.collectionVariables.set('token', json.token);",
+                  "    pm.environment.set('token', json.token);",
+                  "    console.log('Token guardado correctamente');",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"admin123\"\n}"
+            },
+            "url": "{{baseUrl}}/api/auth/login"
+          }
+        },
+        {
+          "name": "Registro",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"juan\",\n  \"email\": \"juan@empresa.com\",\n  \"password\": \"123456\",\n  \"rol\": \"EMPLEADO\"\n}"
+            },
+            "url": "{{baseUrl}}/api/auth/registro"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Productos",
+      "item": [
+        {
+          "name": "Listar productos",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/productos"
+          }
+        },
+        {
+          "name": "Buscar producto por ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/productos/1"
+          }
+        },
+        {
+          "name": "Crear producto",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigo\": \"PROD-001\",\n  \"nombre\": \"Laptop HP\",\n  \"descripcion\": \"Laptop 15 pulgadas\",\n  \"stock\": 10,\n  \"stockMinimo\": 5,\n  \"precio\": 850.00\n}"
+            },
+            "url": "{{baseUrl}}/api/productos"
+          }
+        },
+        {
+          "name": "Actualizar producto",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigo\": \"PROD-001\",\n  \"nombre\": \"Laptop HP Pro\",\n  \"descripcion\": \"Modelo actualizado\",\n  \"stock\": 10,\n  \"stockMinimo\": 3,\n  \"precio\": 900.00\n}"
+            },
+            "url": "{{baseUrl}}/api/productos/1"
+          }
+        },
+        {
+          "name": "Eliminar producto",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/productos/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Proveedores",
+      "item": [
+        {
+          "name": "Listar proveedores",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/proveedores"
+          }
+        },
+        {
+          "name": "Buscar proveedor por ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/proveedores/1"
+          }
+        },
+        {
+          "name": "Crear proveedor",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Distribuidora ABC\",\n  \"documento\": \"20123456789\",\n  \"email\": \"ventas@abc.com\",\n  \"telefono\": \"999888777\",\n  \"direccion\": \"Av. Principal 123\",\n  \"activo\": true\n}"
+            },
+            "url": "{{baseUrl}}/api/proveedores"
+          }
+        },
+        {
+          "name": "Actualizar proveedor",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Distribuidora ABC S.A.\",\n  \"documento\": \"20123456789\",\n  \"email\": \"ventas@abc.com\",\n  \"telefono\": \"999888777\",\n  \"direccion\": \"Av. Principal 456\",\n  \"activo\": true\n}"
+            },
+            "url": "{{baseUrl}}/api/proveedores/1"
+          }
+        },
+        {
+          "name": "Eliminar proveedor",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/proveedores/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Clientes",
+      "item": [
+        {
+          "name": "Listar clientes",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/clientes"
+          }
+        },
+        {
+          "name": "Buscar cliente por ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/clientes/1"
+          }
+        },
+        {
+          "name": "Crear cliente",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Cliente Demo S.A.\",\n  \"documento\": \"20999888777\",\n  \"email\": \"cliente@demo.com\",\n  \"telefono\": \"555444333\",\n  \"direccion\": \"Calle Falsa 123\",\n  \"activo\": true\n}"
+            },
+            "url": "{{baseUrl}}/api/clientes"
+          }
+        },
+        {
+          "name": "Actualizar cliente",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Cliente Demo Actualizado\",\n  \"documento\": \"20999888777\",\n  \"email\": \"nuevo@demo.com\",\n  \"telefono\": \"555444333\",\n  \"direccion\": \"Calle Real 456\",\n  \"activo\": true\n}"
+            },
+            "url": "{{baseUrl}}/api/clientes/1"
+          }
+        },
+        {
+          "name": "Eliminar cliente",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/clientes/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Empleados",
+      "item": [
+        {
+          "name": "Listar empleados",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/empleados"
+          }
+        },
+        {
+          "name": "Buscar empleado por ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/empleados/1"
+          }
+        },
+        {
+          "name": "Crear empleado",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"María\",\n  \"apellido\": \"García\",\n  \"documento\": \"12345678\",\n  \"email\": \"maria@empresa.com\",\n  \"telefono\": \"111222333\",\n  \"cargo\": \"Vendedora\",\n  \"departamento\": \"Ventas\",\n  \"salario\": 2500.00,\n  \"fechaIngreso\": \"2025-01-15\",\n  \"activo\": true\n}"
+            },
+            "url": "{{baseUrl}}/api/empleados"
+          }
+        },
+        {
+          "name": "Actualizar empleado",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"María\",\n  \"apellido\": \"García López\",\n  \"documento\": \"12345678\",\n  \"email\": \"maria@empresa.com\",\n  \"telefono\": \"111222333\",\n  \"cargo\": \"Jefa de Ventas\",\n  \"departamento\": \"Ventas\",\n  \"salario\": 3000.00,\n  \"fechaIngreso\": \"2025-01-15\",\n  \"activo\": true\n}"
+            },
+            "url": "{{baseUrl}}/api/empleados/1"
+          }
+        },
+        {
+          "name": "Eliminar empleado",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/empleados/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Compras",
+      "item": [
+        {
+          "name": "Listar compras",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/compras"
+          }
+        },
+        {
+          "name": "Buscar compra por ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/compras/1"
+          }
+        },
+        {
+          "name": "Registrar compra (aumenta stock)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"proveedorId\": 1,\n  \"numeroFactura\": \"C-001\",\n  \"observacion\": \"Compra inicial de stock\",\n  \"detalles\": [\n    {\n      \"productoId\": 1,\n      \"cantidad\": 20,\n      \"precioUnitario\": 700.00\n    }\n  ]\n}"
+            },
+            "url": "{{baseUrl}}/api/compras"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ventas",
+      "item": [
+        {
+          "name": "Listar ventas",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/ventas"
+          }
+        },
+        {
+          "name": "Buscar venta por ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/ventas/1"
+          }
+        },
+        {
+          "name": "Registrar venta (descuenta stock)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clienteId\": 1,\n  \"numeroFactura\": \"V-001\",\n  \"observacion\": \"Venta de prueba\",\n  \"detalles\": [\n    {\n      \"productoId\": 1,\n      \"cantidad\": 2,\n      \"precioUnitario\": 900.00\n    }\n  ]\n}"
+            },
+            "url": "{{baseUrl}}/api/ventas"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Inventario",
+      "item": [
+        {
+          "name": "Stock bajo",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/inventario/stock-bajo"
+          }
+        },
+        {
+          "name": "Todos los movimientos",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/inventario/movimientos"
+          }
+        },
+        {
+          "name": "Movimientos por producto",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/inventario/movimientos/producto/1"
+          }
+        }
+      ]
+    }
+  ]
+}
