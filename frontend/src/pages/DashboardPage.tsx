@@ -11,6 +11,7 @@ const modules = [
   { to: '/compras', title: 'Compras', desc: 'Ingreso de mercadería (+ stock)', color: 'bg-cyan-500' },
   { to: '/ventas', title: 'Ventas', desc: 'Registro de ventas (− stock)', color: 'bg-rose-500' },
   { to: '/inventario', title: 'Inventario', desc: 'Movimientos y alertas', color: 'bg-orange-500' },
+  { to: '/conversion-monedas', title: 'Cotización de monedas', desc: 'Conversión y tasas internacionales actualizadas', color: 'bg-teal-500' },
 ];
 
 export function DashboardPage() {

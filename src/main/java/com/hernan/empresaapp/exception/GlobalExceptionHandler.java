@@ -33,6 +33,11 @@ public class GlobalExceptionHandler {
         return respuesta(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(ExternalExchangeServiceException.class)
+    public ResponseEntity<ErrorResponseDTO> manejarServicioDeCotizaciones(ExternalExchangeServiceException ex) {
+        return respuesta(ex.getMessage(), HttpStatus.SERVICE_UNAVAILABLE);
+    }
+
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<ErrorResponseDTO> manejarCredencialesInvalidas(BadCredentialsException ex) {
         return respuesta("Usuario o contraseña incorrectos", HttpStatus.UNAUTHORIZED);

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Set;
 
 /**
  * Filtro que intercepta cada petición HTTP.
@@ -22,12 +23,25 @@ import java.io.IOException;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
+    private static final Set<String> PUBLIC_EXCHANGE_PATHS = Set.of(
+            "/api/exchange/latest",
+            "/api/exchange/convert",
+            "/api/exchange/currencies");
+
     private final JwtService jwtService;
     private final CustomUserDetailsService userDetailsService;
 
     public JwtAuthenticationFilter(JwtService jwtService, CustomUserDetailsService userDetailsService) {
         this.jwtService = jwtService;
         this.userDetailsService = userDetailsService;
+    }
+
+    @Override
+    protected boolean shouldNotFilter(@NonNull HttpServletRequest request) {
+        String path = request.getRequestURI();
+        return "GET".equalsIgnoreCase(request.getMethod())
+                && (PUBLIC_EXCHANGE_PATHS.contains(path)
+                || path.startsWith("/api/exchange/latest/"));
     }
 
     @Override

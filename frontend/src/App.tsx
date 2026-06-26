@@ -13,6 +13,7 @@ import { VentasPage } from './pages/VentasPage';
 import { InventarioPage } from './pages/InventarioPage';
 import { UsuariosPage } from './pages/UsuariosPage';
 import { AdminRoute } from './components/AdminRoute';
+import { ConversionMonedasPage } from './pages/ConversionMonedasPage';
 
 export default function App() {
   return (
@@ -35,6 +36,7 @@ export default function App() {
         <Route path="/compras" element={<ComprasPage />} />
         <Route path="/ventas" element={<VentasPage />} />
         <Route path="/inventario" element={<InventarioPage />} />
+        <Route path="/conversion-monedas" element={<ConversionMonedasPage />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

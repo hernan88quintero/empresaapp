@@ -1,0 +1,21 @@
+exchange:
+  provider:
+    base-url: ${EXCHANGE_API_URL:https://api.frankfurter.dev/v2}
+    connect-timeout: 3s
+    response-timeout: 8s
+  cache:
+    ttl: 30m
+    maximum-size: 500
+  scheduler:
+    enabled: ${EXCHANGE_SCHEDULER_ENABLED:true}
+    cron: ${EXCHANGE_SCHEDULER_CRON:0 15 18 * * MON-FRI}
+    zone: ${EXCHANGE_SCHEDULER_ZONE:America/Argentina/Buenos_Aires}
+  supported-currencies:
+    - USD
+    - EUR
+    - ARS
+    - BRL
+    - CLP
+    - UYU
+    - GBP
+    - JPY

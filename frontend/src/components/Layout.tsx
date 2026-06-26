@@ -11,6 +11,7 @@ const links = [
   { to: '/compras', label: 'Compras' },
   { to: '/ventas', label: 'Ventas' },
   { to: '/inventario', label: 'Inventario' },
+  { to: '/conversion-monedas', label: 'Conversión de monedas' },
 ];
 
 export function Layout() {

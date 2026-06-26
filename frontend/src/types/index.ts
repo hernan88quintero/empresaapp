@@ -107,3 +107,43 @@ export interface ApiError {
   status: number;
   fecha: string;
 }
+
+export type Moneda = 'USD' | 'EUR' | 'ARS' | 'BRL' | 'CLP' | 'UYU' | 'GBP' | 'JPY';
+
+export interface ConversionRequest {
+  monedaOrigen: Moneda;
+  monedaDestino: Moneda;
+  monto: number;
+}
+
+export interface ConversionMoneda extends ConversionRequest {
+  id?: number;
+  tipoCambio: number;
+  resultado: number;
+  fechaConversion?: string;
+}
+
+export interface Cotizaciones {
+  monedaBase: 'ARS';
+  valoresEnArs: Record<Moneda, number>;
+  fechaActualizacion: string;
+}
+
+export interface LatestExchange {
+  date: string;
+  base: Moneda;
+  rates: Record<Moneda, number>;
+  source: 'FRANKFURTER' | 'DATABASE_FALLBACK';
+  stale: boolean;
+}
+
+export interface ExchangeConversion {
+  from: Moneda;
+  to: Moneda;
+  amount: number;
+  rate: number;
+  convertedAmount: number;
+  date: string;
+  source: 'FRANKFURTER' | 'DATABASE_FALLBACK' | 'IDENTITY';
+  stale: boolean;
+}

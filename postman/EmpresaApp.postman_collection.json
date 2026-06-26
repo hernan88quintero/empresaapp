@@ -383,6 +383,60 @@
           }
         }
       ]
+    },
+    {
+      "name": "Cotizaciones",
+      "item": [
+        {
+          "name": "Últimas cotizaciones (base USD)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/exchange/latest"
+          }
+        },
+        {
+          "name": "Últimas cotizaciones por moneda base",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/exchange/latest/EUR"
+          }
+        },
+        {
+          "name": "Convertir USD a ARS",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('Respuesta exitosa', () => pm.response.to.have.status(200));",
+                "pm.test('Incluye tasa y resultado', () => {",
+                "  const body = pm.response.json();",
+                "  pm.expect(body.rate).to.be.a('number');",
+                "  pm.expect(body.convertedAmount).to.be.a('number');",
+                "});"
+              ]
+            }
+          }],
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/exchange/convert?from=USD&to=ARS&amount=100"
+          }
+        },
+        {
+          "name": "Monedas soportadas",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/exchange/currencies"
+          }
+        },
+        {
+          "name": "Historial USD/ARS",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/exchange/history?base=USD&quote=ARS&from=2026-01-01&to=2026-12-31"
+          }
+        }
+      ]
     }
   ]
 }

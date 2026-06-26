@@ -25,7 +25,7 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (res) => res,
   (error) => {
-    if (error.response?.status === 401) {
+    if (error.response?.status === 401 || error.response?.status === 403) {
       localStorage.removeItem(TOKEN_KEY);
       localStorage.removeItem('empresaapp_user');
       if (!window.location.pathname.includes('/login')) {
@@ -47,6 +47,7 @@ export function clearAuth() {
 }
 
 export function getStoredUser() {
+  if (!localStorage.getItem(TOKEN_KEY)) return null;
   const raw = localStorage.getItem('empresaapp_user');
   return raw ? JSON.parse(raw) : null;
 }
