@@ -9,9 +9,10 @@ const modules = [
   { to: '/clientes', title: 'Clientes', desc: 'Base de clientes', color: 'bg-emerald-500' },
   { to: '/empleados', title: 'Empleados', desc: 'Personal de la empresa', color: 'bg-amber-500' },
   { to: '/compras', title: 'Compras', desc: 'Ingreso de mercadería (+ stock)', color: 'bg-cyan-500' },
-  { to: '/ventas', title: 'Ventas', desc: 'Registro de ventas (− stock)', color: 'bg-rose-500' },
+  { to: '/ventas', title: 'Ventas', desc: 'Registro de ventas (Stock)', color: 'bg-rose-500' },
   { to: '/inventario', title: 'Inventario', desc: 'Movimientos y alertas', color: 'bg-orange-500' },
-  { to: '/conversion-monedas', title: 'Cotización de monedas', desc: 'Conversión y tasas internacionales actualizadas', color: 'bg-teal-500' },
+  { to: '/conversion-monedas', title: 'Tipo de Cambio Internacional', desc: 'Conversión y tasas internacionales actualizadas', color: 'bg-teal-500' },
+  { to: '/tipo-cambio-venezuela', title: 'Tipo de Cambio Venezuela', desc: 'Tasas oficiales BCV para VES, USD y EUR', color: 'bg-yellow-500' },
 ];
 
 export function DashboardPage() {

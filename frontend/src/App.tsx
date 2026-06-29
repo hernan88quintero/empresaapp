@@ -14,6 +14,7 @@ import { InventarioPage } from './pages/InventarioPage';
 import { UsuariosPage } from './pages/UsuariosPage';
 import { AdminRoute } from './components/AdminRoute';
 import { ConversionMonedasPage } from './pages/ConversionMonedasPage';
+import { VenezuelaExchangePage } from './pages/VenezuelaExchangePage';
 
 export default function App() {
   return (
@@ -37,6 +38,7 @@ export default function App() {
         <Route path="/ventas" element={<VentasPage />} />
         <Route path="/inventario" element={<InventarioPage />} />
         <Route path="/conversion-monedas" element={<ConversionMonedasPage />} />
+        <Route path="/tipo-cambio-venezuela" element={<VenezuelaExchangePage />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

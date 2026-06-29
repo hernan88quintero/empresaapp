@@ -19,3 +19,16 @@ exchange:
     - UYU
     - GBP
     - JPY
+
+venezuela-exchange:
+  provider:
+    base-url: ${VENEZUELA_EXCHANGE_API_URL:https://bcv.today}
+    connect-timeout: 3s
+    response-timeout: 8s
+  cache:
+    ttl: 6h
+    maximum-size: 10
+  scheduler:
+    enabled: ${VENEZUELA_EXCHANGE_SCHEDULER_ENABLED:true}
+    cron: ${VENEZUELA_EXCHANGE_SCHEDULER_CRON:0 15 18 * * MON-FRI}
+    zone: ${VENEZUELA_EXCHANGE_SCHEDULER_ZONE:America/Caracas}

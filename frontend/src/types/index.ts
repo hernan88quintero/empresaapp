@@ -147,3 +147,35 @@ export interface ExchangeConversion {
   source: 'FRANKFURTER' | 'DATABASE_FALLBACK' | 'IDENTITY';
   stale: boolean;
 }
+
+export type VenezuelaCurrency = 'VES' | 'USD' | 'EUR';
+export type VenezuelaRateType = 'OFICIAL' | 'PROMEDIO' | 'PARALELO';
+
+export interface VenezuelaExchangeRate {
+  id: number | null;
+  originCurrency: Exclude<VenezuelaCurrency, 'VES'>;
+  destinationCurrency: 'VES';
+  rate: number;
+  source: string;
+  quotationDate: string;
+  registeredAt: string | null;
+  rateType: VenezuelaRateType;
+  stale: boolean;
+}
+
+export interface VenezuelaConversion {
+  from: VenezuelaCurrency;
+  to: VenezuelaCurrency;
+  amount: number;
+  rate: number;
+  convertedAmount: number;
+  quotationDate: string;
+  source: string;
+  stale: boolean;
+}
+
+export interface VenezuelaSyncResponse {
+  synchronizedRates: number;
+  synchronizedAt: string;
+  rates: VenezuelaExchangeRate[];
+}

@@ -1,0 +1,72 @@
+{
+  "info": {
+    "name": "EmpresaApp - Tipo de Cambio Venezuela",
+    "description": "Pruebas del módulo. Los GET son públicos; POST /sync requiere el token JWT de EmpresaApp.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "token", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Tasas actuales USD y EUR",
+      "request": {
+        "auth": { "type": "noauth" },
+        "method": "GET",
+        "url": "{{baseUrl}}/api/venezuela/exchange/latest"
+      }
+    },
+    {
+      "name": "Tasa actual USD",
+      "request": {
+        "auth": { "type": "noauth" },
+        "method": "GET",
+        "url": "{{baseUrl}}/api/venezuela/exchange/latest/USD"
+      }
+    },
+    {
+      "name": "Tasa actual EUR",
+      "request": {
+        "auth": { "type": "noauth" },
+        "method": "GET",
+        "url": "{{baseUrl}}/api/venezuela/exchange/latest/EUR"
+      }
+    },
+    {
+      "name": "Histórico USD",
+      "request": {
+        "auth": { "type": "noauth" },
+        "method": "GET",
+        "url": "{{baseUrl}}/api/venezuela/exchange/history?currency=USD&from=2026-01-01&to=2026-06-29"
+      }
+    },
+    {
+      "name": "Convertir 100 USD a VES",
+      "request": {
+        "auth": { "type": "noauth" },
+        "method": "GET",
+        "url": "{{baseUrl}}/api/venezuela/exchange/convert?from=USD&to=VES&amount=100"
+      }
+    },
+    {
+      "name": "Convertir EUR a USD",
+      "request": {
+        "auth": { "type": "noauth" },
+        "method": "GET",
+        "url": "{{baseUrl}}/api/venezuela/exchange/convert?from=EUR&to=USD&amount=100"
+      }
+    },
+    {
+      "name": "Sincronizar manualmente",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }]
+        },
+        "method": "POST",
+        "url": "{{baseUrl}}/api/venezuela/exchange/sync"
+      }
+    }
+  ]
+}

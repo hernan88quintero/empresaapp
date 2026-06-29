@@ -44,7 +44,11 @@ public class SecurityConfig {
                                 "/api/exchange/latest",
                                 "/api/exchange/latest/**",
                                 "/api/exchange/convert",
-                                "/api/exchange/currencies").permitAll()
+                                "/api/exchange/currencies",
+                                "/api/venezuela/exchange/latest",
+                                "/api/venezuela/exchange/latest/**",
+                                "/api/venezuela/exchange/history",
+                                "/api/venezuela/exchange/convert").permitAll()
                         .requestMatchers(HttpMethod.GET, "/").permitAll()
                         .anyRequest().authenticated()
                 )

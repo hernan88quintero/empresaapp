@@ -11,7 +11,8 @@ const links = [
   { to: '/compras', label: 'Compras' },
   { to: '/ventas', label: 'Ventas' },
   { to: '/inventario', label: 'Inventario' },
-  { to: '/conversion-monedas', label: 'Conversión de monedas' },
+  { to: '/conversion-monedas', label: 'Tipo Cambio Internacional' },
+  { to: '/tipo-cambio-venezuela', label: 'Tipo Cambio Venezuela' },
 ];
 
 export function Layout() {
